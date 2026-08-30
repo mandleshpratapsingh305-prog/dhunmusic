@@ -1,0 +1,90 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+
+    <!-- Headphone Outer Band -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:strokeLineCap="round"
+        android:pathData="M 128,260 C 128,155 185,98 256,98 C 327,98 384,155 384,260" />
+
+    <!-- Headphone Inner Arc Accent -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="16"
+        android:strokeLineCap="round"
+        android:pathData="M 188,154 C 206,134 230,122 256,122 C 282,122 306,134 324,154" />
+
+    <!-- Left Earpad Outer Dome -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 144,232 C 120,232 108,252 108,276 C 108,300 120,320 144,320" />
+
+    <!-- Left Earpad Cushion Capsule -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 152,228 L 162,228 C 170,228 174,234 174,242 L 174,310 C 174,318 170,324 162,324 L 152,324 C 144,324 140,318 140,310 L 140,242 C 140,234 144,228 152,228 Z" />
+
+    <!-- Right Earpad Outer Dome -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 368,232 C 392,232 404,252 404,276 C 404,300 392,320 368,320" />
+
+    <!-- Right Earpad Cushion Capsule -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 350,228 L 360,228 C 368,228 372,234 372,242 L 372,310 C 372,318 368,324 360,324 L 350,324 C 342,324 338,318 338,310 L 338,242 C 338,234 342,228 350,228 Z" />
+
+    <!-- Musical Beamed Notes -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 232,340 L 232,210 L 320,180 L 320,300" />
+
+    <!-- Musical Beam Bar Slant -->
+    <path
+        android:fillColor="#0AEAF8"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="8"
+        android:strokeLineJoin="round"
+        android:pathData="M 232,210 L 320,180 L 320,222 L 232,252 Z" />
+
+    <!-- Left Note Head (Circle) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:pathData="M 208,368 A 24,24 0 1,1 256,368 A 24,24 0 1,1 208,368" />
+
+    <!-- Right Note Head (Circle) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AEAF8"
+        android:strokeWidth="20"
+        android:pathData="M 296,328 A 24,24 0 1,1 344,328 A 24,24 0 1,1 296,328" />
+
+</vector>
