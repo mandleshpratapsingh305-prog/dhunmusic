@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.flowOn
 
 internal class UpdateRepositoryImpl : UpdateRepository {
     override fun checkForGithubReleaseUpdate(): Flow<Resource<UpdateData>> = flow<Resource<UpdateData>> {
-        // Disabled: No update check
+        emit(Resource.Error("Handled in ViewModel"))
     }.flowOn(Dispatchers.IO)
 
     override fun checkForFdroidUpdate(): Flow<Resource<UpdateData>> = flow<Resource<UpdateData>> {
-        // Disabled: No update check
+        emit(Resource.Error("Disabled"))
     }.flowOn(Dispatchers.IO)
 }

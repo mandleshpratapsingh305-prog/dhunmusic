@@ -1023,47 +1023,50 @@ class SharedViewModel(
     val updateResponse: StateFlow<UpdateData?> = _updateResponse
 
     fun checkForUpdate() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             _isCheckingUpdate.value = true
-            val updateChannel = dataStoreManager.updateChannel.first()
             dataStoreManager.putString(
                 "CheckForUpdateAt",
                 System.currentTimeMillis().toString(),
             )
-            if (updateChannel == DataStoreManager.GITHUB) {
-                updateRepository.checkForGithubReleaseUpdate().collectLatest { response ->
-                    val data = response.data
-                    when (response) {
-                        is Resource.Success if (data != null) -> {
-                            _updateResponse.value = data
-                            showedUpdateDialog = true
-                        }
-
-                        else -> {
-                            log("Check for update error: ${response.message}", LogLevel.WARN)
-                        }
-                    }
-                    _isCheckingUpdate.value = false
+            try {
+                // Real GitHub API call
+                val url = "https://api.github.com/repos/mandleshpratapsingh305-prog/dhunmusic/releases/latest"
+                val connection = (java.net.URI.create(url).toURL().openConnection() as java.net.HttpURLConnection).apply {
+                    requestMethod = "GET"
+                    setRequestProperty("Accept", "application/vnd.github.v3+json")
+                    setRequestProperty("User-Agent", "DhunMusic-App")
+                    connectTimeout = 8000
+                    readTimeout = 8000
                 }
-            } else if (updateChannel == DataStoreManager.FDROID) {
-                updateRepository.checkForFdroidUpdate().collectLatest { response ->
-                    val data = response.data
-                    when (response) {
-                        is Resource.Success if (data != null) -> {
-                            _updateResponse.value = data
-                            showedUpdateDialog = true
-                        }
 
-                        else -> {
-                            log("Check for update error: ${response.message}", LogLevel.WARN)
-                        }
+                if (connection.responseCode == 200) {
+                    val responseText = connection.inputStream.bufferedReader().use { it.readText() }
+                    val tagName = responseText.substringAfter("\"tag_name\":\"", "").substringBefore("\"")
+                    val publishedAt = responseText.substringAfter("\"published_at\":\"", "").substringBefore("\"")
+                    val body = responseText.substringAfter("\"body\":\"", "").substringBefore("\"")
+                        .replace("\\r\\n", "\n").replace("\\n", "\n")
+
+                    val latestVersion = tagName.removePrefix("v").trim()
+                    val currentVersion = VersionManager.getVersionName().removePrefix("v").trim()
+
+                    if (latestVersion.isNotEmpty() && latestVersion != currentVersion) {
+                        val updateData = UpdateData(
+                            tagName = tagName,
+                            releaseTime = publishedAt.ifEmpty { null },
+                            body = body,
+                        )
+                        _updateResponse.value = updateData
+                        showedUpdateDialog = true
                     }
-                    _isCheckingUpdate.value = false
                 }
+            } catch (e: Exception) {
+                log("Check for update error: ${e.message}", LogLevel.WARN)
+            } finally {
+                _isCheckingUpdate.value = false
             }
         }
     }
-
     fun stopPlayer() {
         _nowPlayingScreenData.value = NowPlayingScreenData.initial()
         _nowPlayingState.value = null

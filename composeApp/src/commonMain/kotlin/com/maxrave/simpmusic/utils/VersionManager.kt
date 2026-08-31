@@ -7,7 +7,7 @@ object VersionManager {
 
     fun initialize() {
         if (versionName == null) {
-            versionName ="1.3.0"
+            versionName ="1.3.1"
                 try {
                     BuildKonfig.versionName
                 } catch (_: Exception) {

@@ -27,7 +27,7 @@ android {
             libs.versions.version.code
                 .get()
                 .toInt()
-        versionName ="1.3.0"
+        versionName ="1.3.1"
             libs.versions.version.name
                 .get()
         vectorDrawables.useSupportLibrary = true
